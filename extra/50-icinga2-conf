@@ -1,0 +1,14 @@
+#!/bin/bash
+
+. /opt/helpers
+
+echo "=> 30-kentik-bootstrap-icinga2: Adding kentik-conf.d as symlink to icinga2.conf."
+cat <<EOT >> /etc/icinga2/icinga2.conf
+/**
+* WARN! this file has been touched by puppet
+*	Symlinked conf.d directory for storing all custom, static, Kentik
+*	objects from docker bind mounted directory.
+*/
+include_recursive "/etc/kentik-icinga2/conf.d"
+EOT
+``

@@ -2,6 +2,8 @@
 
 . /opt/helpers
 
+export ICINGA2_FEATURE_GRAPHITE_METADATA=${ICINGA2_FEATURE_GRAPHITE_METADATA:-false}
+
 # Graphite writer
 if evaluate_boolean "${ICINGA2_FEATURE_GRAPHITE}"; then
 	echo "=> Enabling Icinga2 graphite writer"
@@ -18,6 +20,7 @@ if evaluate_boolean "${ICINGA2_FEATURE_GRAPHITE}"; then
 	  host = "$ICINGA2_FEATURE_GRAPHITE_HOST"
 	  port = "$ICINGA2_FEATURE_GRAPHITE_PORT"
 	  enable_send_thresholds = true
+	  enable_send_metadata = $ICINGA2_FEATURE_GRAPHITE_METADATA
 	}
 	END
 

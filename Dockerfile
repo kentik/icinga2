@@ -107,5 +107,45 @@ RUN true \
 
 EXPOSE 80 443 5665
 
+#########################
+### KENTIK-FORK #########
+#########################
+
+RUN apt-get update && apt-get install -y \
+  libwww-perl \
+  libcrypt-ssleay-perl \
+  libsys-syslog-perl \
+  python-pip \
+  python-dev \
+  lsof \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt
+
+## INTEGRATIONS
+ADD https://raw.github.com/PagerDuty/pagerduty-icinga-pl/master/pagerduty_icinga.pl /usr/local/bin/
+ADD https://raw.githubusercontent.com/OpenTSDB/opentsdb/master/tools/check_tsd /usr/local/bin/
+ADD https://raw.githubusercontent.com/timdaman/check_docker/master/check_docker /usr/local/bin/
+COPY extra/send2slack.py /usr/local/bin/
+
+RUN chmod 755 /usr/local/bin/pagerduty_icinga.pl
+RUN chmod 755 /usr/local/bin/check_tsd
+RUN chmod 755 /usr/local/bin/check_docker
+RUN chmod 755 /usr/local/bin/send2slack.py
+RUN mkdir -p /etc/icinga2-plugins
+
+# install some other goodies
+COPY extra/css-themes/Dark.less /usr/share/icingaweb2/public/css/themes/
+
+# dockerception
+RUN mkdir /root/docker.info
+COPY * /root/docker.info/
+
+#########################
+### KENTIK-FORK #########
+#########################
+
 # Initialize and run Supervisor
 ENTRYPOINT ["/opt/run"]

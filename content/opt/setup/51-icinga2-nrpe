@@ -1,0 +1,12 @@
+#!/bin/bash
+
+. /opt/helpers
+
+# force nrpe checks to run in v2
+export ICINGA2_FORCE_NRPE_V2=${ICINGA2_FORCE_NRPE_V2:-false}
+
+if evaluate_boolean "${ICINGA2_FORCE_NRPE_V2}"; then
+	echo "=> Forcing NRPE server to run all checks in v2.x protocol."
+	COMMAND_PLUGINS=/usr/share/icinga2/include/command-plugins.conf
+	sed -i 's/vars.nrpe_version_2 = false/vars.nrpe_version_2 = true/g' $COMMAND_PLUGINS
+fi
