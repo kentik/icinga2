@@ -1,3 +1,17 @@
+### KENTIK-FORK
+```
+Slightly modified icinga2 container repo which incorporates some additions to 
+the bootstrapping phases.
+```
+##### content/opt/setup/51-icinga2-graphite
+Allow additional env variable to determine whehter or not to enable metadata (as well as perfdata)
+##### content/opt/setup/51-icinga2-nrpe
+Accepts an environment variable (`ICINGA2_FORCE_NRPE_V2`) which hard codes nrpe to v2 in `/usr/share/icinga2/include/command-plugins.conf`. This resolves errors which occur on clients running NRPE v2 (debian:jessie). 
+##### icinga-env.sh
+Consolidated environment variables file
+
+#### END KENTIK-FORK
+
 # icinga2
 
 This repository contains the source for the [icinga2](https://www.icinga.org/icinga2/) [docker](https://www.docker.com) image.
