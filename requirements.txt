@@ -37,7 +37,7 @@ google-gax==0.15.14
 google-resumable-media==0.2.3
 googleapis-common-protos==1.5.2
 grpc-google-iam-v1==0.11.1
-grpcio==1.6.0
+grpcio==1.53.0
 httplib2==0.10.3
 idna==2.6
 lockfile==0.12.2
