@@ -49,7 +49,7 @@ pyasn1==0.3.4
 pyasn1-modules==0.1.4
 python-daemon==2.1.2
 requests==2.18.4
-rsa==3.4.2
+rsa==4.7
 six==1.10.0
 tenacity==4.4.0
 urllib3==1.22
